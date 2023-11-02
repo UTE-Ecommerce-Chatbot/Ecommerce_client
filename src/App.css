@@ -2621,10 +2621,10 @@ h4.heading {
   text-decoration-thickness: 0.1px;
 }
 
-a.cancelOrderE{
+.cancelOrderE{
   color:rgb(0, 0, 0);
 }
-a.cancelOrderE:hover{
+.cancelOrderE:hover{
   color:red;
   box-shadow: 0 0.5px red;
 }

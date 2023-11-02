@@ -13,6 +13,7 @@ import RegisterPage from 'pages/RegisterPage'
 import NotFoundPage from 'pages/NotFound'
 
 import DetailProduct from 'pages/DetailProduct';
+import CompareProduct from 'pages/CompareProduct';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import jwtDecode from 'jwt-decode';
@@ -69,6 +70,7 @@ function App() {
               <PublicRoute exact path="/" component={HomePage} />
               <PublicRoute exact path="/login" component={LoginPage} />
               <PublicRoute exact path="/register" component={RegisterPage} />
+              <PublicRoute exact path="/so-sanh-san-pham" component={CompareProduct} />
               <Route exact path="/oauth2/redirect" component={OAuth2RedirectHandler}></Route>
               <Route exact path="/checkout/cart" component={CartPage}></Route>
               <Route exact path="/search" render={(props) => <ListProductPage {...props} key={props.location.key} />}></Route>
@@ -76,6 +78,7 @@ function App() {
               <Route exact path="/:category" render={(props) => <ListProductPage {...props} key={props.location.key} />}></Route>
               <Route exact path="/:category/:subcategory" render={(props) => <ListProductPage {...props} key={props.location.key} />}></Route>
               <Route exact path="/san-pham/:id/:slug" render={(props) => <DetailProduct {...props} key={props.location.key} />}></Route>
+              
               <PublicRoute path="*" component={NotFoundPage} />
             </Switch>
 
