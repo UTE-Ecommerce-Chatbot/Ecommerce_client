@@ -266,8 +266,8 @@ function ResultOrderPage(props) {
                                             </div>
                                             <div className="order-info__content">
                                                 <h3 className="thanks-msg">Cảm ơn bạn đã mua hàng tại VN!</h3>
-                                                <p>Mã số đơn hàng của bạn:</p>
-                                                <div className="order-number">{orderDetail.id}</div>
+                                                {/* <p>Mã số đơn hàng của bạn:</p>
+                                                <div className="order-number">{orderDetail && orderDetail.id}</div> */}
                                                 <p>Bạn có thể xem lại <Link to="/customer/order/history">đơn hàng của tôi</Link>
                                                 </p>
                                             </div>

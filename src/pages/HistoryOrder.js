@@ -6,7 +6,16 @@ import { currency } from 'utils/FormatCurrency'
 import useTimeout from 'hooks/useTimeout';
 import Loading from 'components/Loading/Loading';
 import { getUserLogin } from 'actions/services/UserActions';
-
+import {
+    getDetailOrderById,
+    cancelOrder,
+  } from 'actions/services/OrderServices';
+import { toast } from "react-toastify";
+toast.configure({
+    autoClose: 2000,
+    draggable: false,
+    limit: 3,
+  });
 export default function HistoryOrder(props) {
 
     const [orders, setOrders] = useState([]);
@@ -16,7 +25,34 @@ export default function HistoryOrder(props) {
         fullName: '',
         username: '',
     })
-
+    // const [userInfo, setUserInfo] = useState({});
+    // const [orderInfo, setOrderInfo] = useState({});
+    const handleSubmitOrder = (e) => {
+        e.preventDefault();
+        setLoading(true);
+        const id = props.match.params.id;
+            cancelOrder(id)
+              .then((res) => {
+                setLoading(false);
+                toast.success(res.data.message);
+                getData();
+              })
+              .catch((err) => {
+                setLoading(false);
+                toast.warning(err.response.data.message);
+              });
+      };
+      const getData = () => {
+        const id = props.match.params.id;
+        getDetailOrderById(id)
+          .then((res) => {
+            setLoading(false);
+            setOrders(res.data.order_details);
+            // setUserInfo(res.data.user);
+            // setOrderInfo(res.data.order_info);
+          })
+          .catch((err) => console.log(err));
+      };
     const getUser = () => {
         getUserLogin()
             .then(res => {
@@ -62,6 +98,7 @@ export default function HistoryOrder(props) {
                                                         <th>Sản phẩm</th>
                                                         <th>Tổng tiền</th>
                                                         <th>Trạng thái đơn hàng</th>
+                                                        <th>Hủy đơn hàng</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -78,10 +115,14 @@ export default function HistoryOrder(props) {
                                                                     <td>{item.description}</td>
                                                                     <td>{currency(item.total_price + item.ship_fee)}</td>
                                                                     <td>{item.status_order_name}</td>
+                                                                    <td>
+                                                                    <a href="/api/orders/cancel/{{ order_id }}"className="cancelOrderE" onClick={handleSubmitOrder}>Hủy đơn hàng</a>
+                                                                    </td>
                                                                 </tr>
                                                             )
                                                         })
                                                     }
+                                           
                                                 </tbody>
                                             </table>
                                         )

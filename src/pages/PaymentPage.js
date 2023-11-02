@@ -30,7 +30,8 @@ const shipmethods = [
 const icon_bank = [
     "https://frontend.tikicdn.com/_desktop-next/static/img/icons/checkout/icon-payment-method-cod.svg",
     "https://salt.tikicdn.com/ts/upload/76/80/08/62e0faf2af2869ba93da5f79a9dc4c4b.png",
-    "https://frontend.tikicdn.com/_desktop-next/static/img/icons/checkout/icon-payment-method-mo-mo.svg",
+    "https://play.google.com/store/apps/details?id=com.mservice.merchant.app&hl=vi",
+    // "https://frontend.tikicdn.com/_desktop-next/static/img/icons/checkout/icon-payment-method-mo-mo.svg",
     "https://frontend.tikicdn.com/_desktop-next/static/img/icons/checkout/icon-payment-method-zalo-pay.svg",
 ]
 
@@ -125,7 +126,7 @@ function PaymentPage(props) {
 
     useEffect(() => {
 
-        document.title = "Thông tin thanh toán | Tiki"
+        document.title = "Thông tin thanh toán"
 
         if (token) {
             dispatch(getDetailCartSelected())
@@ -176,197 +177,197 @@ function PaymentPage(props) {
             orderInfo.amount = calculateTotalOrder(cart?.total_price);
             orderInfo.vnp_OrderInfo = "Thanh toan doan hang";
             orderInfo.vnp_Amount = calculateTotalOrder(cart?.total_price);
-            if (type === 3) {
-                let now = new Date();
-                const create_time = now.getDate() + "-" + (now.getMonth() + 1) + "-" + now.getFullYear();
-                const order_details = cart?.cart_details.map(item => {
-                    return {
-                        product_id: item.product_id,
-                        color: item.color,
-                        quantity: item.quantity,
-                        price: item.price,
-                        total_price: item.price * item.quantity
-                    }
-                })
-                const payment = {
-                    type: 1,
-                    method_code: 'momo',
-                    datePayment: create_time,
-                    tradingCode: null,
-                    status: 0
-                }
+            // if (type === 3) {
+            //     let now = new Date();
+            //     const create_time = now.getDate() + "-" + (now.getMonth() + 1) + "-" + now.getFullYear();
+            //     const order_details = cart?.cart_details.map(item => {
+            //         return {
+            //             product_id: item.product_id,
+            //             color: item.color,
+            //             quantity: item.quantity,
+            //             price: item.price,
+            //             total_price: item.price * item.quantity
+            //         }
+            //     })
+            //     const payment = {
+            //         type: 1,
+            //         method_code: 'momo',
+            //         datePayment: create_time,
+            //         tradingCode: null,
+            //         status: 0
+            //     }
 
-                const order = {
-                    username: user.username,
-                    email: user.email,
-                    customer_name: user?.fullName,
-                    total_price: orderInfo.amount,
-                    total_item: cart?.items_count,
-                    order_details: order_details,
-                    orderInfo: "Thanh toan don hang",
-                    address: user ? user?.house : "",
-                    province: user ? user?.city : "",
-                    district: user ? user?.district : "",
-                    ward: user ? user?.ward : "",
-                    payment: payment,
-                    phone: user?.phone,
-                    name: user?.fullName,
-                    ward_code: user?.ward_id,
-                    district_id: user?.district_id,
-                    ship_fee: calculateShipFeeIfTotalMorethan3Mil(cart?.total_price),
-                    ship_type: shipType
-                }
-                addOrder(order)
-                    .then((res) => {
-                        localStorage.setItem('order_id', res.id);
-                        orderInfo.order_id = res.id;
-                        makePaymentMomo(orderInfo)
-                            .then((res1) => {
-                                if (res1.data.errorCode === 0 || res1.data.errorCode === "0") {
-                                    window.location.href = res1.data.payUrl;
-                                } else {
-                                    toast.warning('Có lỗi xảy ra, mời thực hiện lại!');
-                                }
+            //     const order = {
+            //         username: user.username,
+            //         email: user.email,
+            //         customer_name: user?.fullName,
+            //         total_price: orderInfo.amount,
+            //         total_item: cart?.items_count,
+            //         order_details: order_details,
+            //         orderInfo: "Thanh toan don hang",
+            //         address: user ? user?.house : "",
+            //         province: user ? user?.city : "",
+            //         district: user ? user?.district : "",
+            //         ward: user ? user?.ward : "",
+            //         payment: payment,
+            //         phone: user?.phone,
+            //         name: user?.fullName,
+            //         ward_code: user?.ward_id,
+            //         district_id: user?.district_id,
+            //         ship_fee: calculateShipFeeIfTotalMorethan3Mil(cart?.total_price),
+            //         ship_type: shipType
+            //     }
+            //     addOrder(order)
+            //         .then((res) => {
+            //             localStorage.setItem('order_id', res.id);
+            //             orderInfo.order_id = res.id;
+            //             makePaymentMomo(orderInfo)
+            //                 .then((res1) => {
+            //                     if (res1.data.errorCode === 0 || res1.data.errorCode === "0") {
+            //                         window.location.href = res1.data.payUrl;
+            //                     } else {
+            //                         toast.warning('Có lỗi xảy ra, mời thực hiện lại!');
+            //                     }
 
-                            })
-                        handleCompleteCart();
-                    })
-                    .catch(() => toast.error('Đặt hàng không thành công, mời thực hiện lại!', {
-                        position: "bottom-center",
-                        theme: 'dark',
-                        autoClose: 2000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                    }))
-            } else if (type === 4) {
-                let now = new Date();
-                const create_time = now.getDate() + "-" + (now.getMonth() + 1) + "-" + now.getFullYear();
-                const order_details = cart?.cart_details.map(item => {
-                    return {
-                        product_id: item.product_id,
-                        color: item.color,
-                        quantity: item.quantity,
-                        price: item.price,
-                        total_price: item.price * item.quantity
-                    }
-                })
-                const payment = {
-                    type: 1,
-                    method_code: 'zalopay',
-                    datePayment: create_time,
-                    tradingCode: null,
-                    status: 0
-                }
+            //                 })
+            //             handleCompleteCart();
+            //         })
+            //         .catch(() => toast.error('Đặt hàng không thành công, mời thực hiện lại!', {
+            //             position: "bottom-center",
+            //             theme: 'dark',
+            //             autoClose: 2000,
+            //             hideProgressBar: false,
+            //             closeOnClick: true,
+            //             pauseOnHover: true,
+            //             draggable: true,
+            //             progress: undefined,
+            //         }))
+            // } else if (type === 4) {
+            //     let now = new Date();
+            //     const create_time = now.getDate() + "-" + (now.getMonth() + 1) + "-" + now.getFullYear();
+            //     const order_details = cart?.cart_details.map(item => {
+            //         return {
+            //             product_id: item.product_id,
+            //             color: item.color,
+            //             quantity: item.quantity,
+            //             price: item.price,
+            //             total_price: item.price * item.quantity
+            //         }
+            //     })
+            //     const payment = {
+            //         type: 1,
+            //         method_code: 'zalopay',
+            //         datePayment: create_time,
+            //         tradingCode: null,
+            //         status: 0
+            //     }
 
-                const order = {
-                    username: user.username,
-                    email: user.email,
-                    customer_name: user?.fullName,
-                    total_price: orderInfo.amount,
-                    total_item: cart?.items_count,
-                    order_details: order_details,
-                    orderInfo: "Thanh toan don hang",
-                    address: user ? user?.house : "",
-                    province: user ? user?.city : "",
-                    district: user ? user?.district : "",
-                    ward: user ? user?.ward : "",
-                    payment: payment,
-                    phone: user?.phone,
-                    name: user?.fullName,
-                    ward_code: user?.ward_id,
-                    district_id: user?.district_id,
-                    ship_fee: calculateShipFeeIfTotalMorethan3Mil(cart?.total_price),
-                    ship_type: shipType
-                }
-                addOrder(order)
-                    .then((res) => {
-                        localStorage.setItem('order_id', res.id);
-                        orderInfo.order_id = res.id;
-                        makePaymentZaloPay(res, orderInfo)
-                            .then((res1) => {
-                                if (res1.data.returncode === 1) {
-                                    window.location.href = res1.data.orderurl;
-                                } else {
-                                    toast.warning('Có lỗi xảy ra, mời thực hiện lại!');
-                                }
+            //     const order = {
+            //         username: user.username,
+            //         email: user.email,
+            //         customer_name: user?.fullName,
+            //         total_price: orderInfo.amount,
+            //         total_item: cart?.items_count,
+            //         order_details: order_details,
+            //         orderInfo: "Thanh toan don hang",
+            //         address: user ? user?.house : "",
+            //         province: user ? user?.city : "",
+            //         district: user ? user?.district : "",
+            //         ward: user ? user?.ward : "",
+            //         payment: payment,
+            //         phone: user?.phone,
+            //         name: user?.fullName,
+            //         ward_code: user?.ward_id,
+            //         district_id: user?.district_id,
+            //         ship_fee: calculateShipFeeIfTotalMorethan3Mil(cart?.total_price),
+            //         ship_type: shipType
+            //     }
+            //     addOrder(order)
+            //         .then((res) => {
+            //             localStorage.setItem('order_id', res.id);
+            //             orderInfo.order_id = res.id;
+            //             makePaymentZaloPay(res, orderInfo)
+            //                 .then((res1) => {
+            //                     if (res1.data.returncode === 1) {
+            //                         window.location.href = res1.data.orderurl;
+            //                     } else {
+            //                         toast.warning('Có lỗi xảy ra, mời thực hiện lại!');
+            //                     }
 
-                            })
-                        handleCompleteCart();
-                    })
-                    .catch(() => toast.error('Đặt hàng không thành công, mời thực hiện lại!', {
-                        position: "bottom-center",
-                        theme: 'dark',
-                        autoClose: 2000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                    }))
-            } else if (type === 2) {
-                let now = new Date();
-                const create_time = now.getDate() + "-" + (now.getMonth() + 1) + "-" + now.getFullYear();
-                const order_details = cart?.cart_details.map(item => {
-                    return {
-                        product_id: item.product_id,
-                        color: item.color,
-                        quantity: item.quantity,
-                        price: item.price,
-                        total_price: item.price * item.quantity
-                    }
-                })
-                const payment = {
-                    type: 1,
-                    method_code: 'vnpay',
-                    datePayment: create_time,
-                    tradingCode: null,
-                    status: 0
-                }
+            //                 })
+            //             handleCompleteCart();
+            //         })
+            //         .catch(() => toast.error('Đặt hàng không thành công, mời thực hiện lại!', {
+            //             position: "bottom-center",
+            //             theme: 'dark',
+            //             autoClose: 2000,
+            //             hideProgressBar: false,
+            //             closeOnClick: true,
+            //             pauseOnHover: true,
+            //             draggable: true,
+            //             progress: undefined,
+            //         }))
+            // } else if (type === 2) {
+            //     let now = new Date();
+            //     const create_time = now.getDate() + "-" + (now.getMonth() + 1) + "-" + now.getFullYear();
+            //     const order_details = cart?.cart_details.map(item => {
+            //         return {
+            //             product_id: item.product_id,
+            //             color: item.color,
+            //             quantity: item.quantity,
+            //             price: item.price,
+            //             total_price: item.price * item.quantity
+            //         }
+            //     })
+            //     const payment = {
+            //         type: 1,
+            //         method_code: 'vnpay',
+            //         datePayment: create_time,
+            //         tradingCode: null,
+            //         status: 0
+            //     }
 
-                const order = {
-                    username: user.username,
-                    email: user.email,
-                    customer_name: user?.fullName,
-                    total_price: orderInfo.vnp_Amount,
-                    total_item: cart?.items_count,
-                    order_details: order_details,
-                    orderInfo: orderInfo.vnp_OrderInfo,
-                    address: user ? user?.house : "",
-                    province: user ? user?.city : "",
-                    district: user ? user?.district : "",
-                    ward: user ? user?.ward : "",
-                    payment: payment,
-                    phone: user.phone,
-                    name: user.fullName,
-                    ward_code: user?.ward_id,
-                    district_id: user?.district_id,
-                    ship_fee: calculateShipFeeIfTotalMorethan3Mil(cart?.total_price),
-                    ship_type: shipType
+            //     const order = {
+            //         username: user.username,
+            //         email: user.email,
+            //         customer_name: user?.fullName,
+            //         total_price: orderInfo.vnp_Amount,
+            //         total_item: cart?.items_count,
+            //         order_details: order_details,
+            //         orderInfo: orderInfo.vnp_OrderInfo,
+            //         address: user ? user?.house : "",
+            //         province: user ? user?.city : "",
+            //         district: user ? user?.district : "",
+            //         ward: user ? user?.ward : "",
+            //         payment: payment,
+            //         phone: user.phone,
+            //         name: user.fullName,
+            //         ward_code: user?.ward_id,
+            //         district_id: user?.district_id,
+            //         ship_fee: calculateShipFeeIfTotalMorethan3Mil(cart?.total_price),
+            //         ship_type: shipType
                     
-                }
-                addOrder(order)
-                    .then((res) => {
-                        localStorage.setItem('order_id', res.id);
-                        makePaymentVnpay(orderInfo)
-                            .then((res) => {
-                                window.location.href = res.data.redirect_url;
-                            })
-                        handleCompleteCart();
-                    })
-                    .catch(() => toast.error('Đặt hàng không thành công, mời thực hiện lại!', {
-                        position: "bottom-center",
-                        theme: 'dark',
-                        autoClose: 2000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                    }))
-            } else if (type === 1) {
+            //     }
+            //     addOrder(order)
+            //         .then((res) => {
+            //             localStorage.setItem('order_id', res.id);
+            //             makePaymentVnpay(orderInfo)
+            //                 .then((res) => {
+            //                     window.location.href = res.data.redirect_url;
+            //                 })
+            //             handleCompleteCart();
+            //         })
+            //         .catch(() => toast.error('Đặt hàng không thành công, mời thực hiện lại!', {
+            //             position: "bottom-center",
+            //             theme: 'dark',
+            //             autoClose: 2000,
+            //             hideProgressBar: false,
+            //             closeOnClick: true,
+            //             pauseOnHover: true,
+            //             draggable: true,
+            //             progress: undefined,
+            //         }))
+            // } else if (type === 1) {
                 let now = new Date();
                 const create_time = now.getDate() + "-" + (now.getMonth() + 1) + "-" + now.getFullYear();
                 const order_details = cart?.cart_details.map(item => {
@@ -423,7 +424,7 @@ function PaymentPage(props) {
                     .catch((err) => {
                         console.log(err);
                     })
-            }
+            // }
         }
     }
 
