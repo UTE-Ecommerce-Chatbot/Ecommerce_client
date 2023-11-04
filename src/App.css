@@ -2628,3 +2628,245 @@ h4.heading {
   color:red;
   box-shadow: 0 0.5px red;
 }
+
+.product-compare{
+  color:rgb(0, 0, 0);
+}
+.product-compare:hover{
+  color:#017fff;
+  box-shadow: 0 0.5px #017fff;
+}
+
+.image-product{
+  width: 100%;
+  padding: 0 160px 10px 265px;
+  display: flex;
+  justify-content: space-between;
+}
+.product1{
+  margin-top: 35px;
+  height: 100%;
+  width: 40%;
+  right: 0;
+ 
+}
+.line-image{
+  height: 80%;
+  width: 1px;
+  margin-top: 20px;
+  background-color: #0077ff;
+}
+.product2{
+  height: 100%;
+  width: 40%;
+  left: 0;
+  
+}
+.group .content.has-table-compare {
+  width: 100%;
+}
+
+.compare-product-item__img{
+  height: 200px;
+}
+.compare-product-item{
+  background-color: var(--white-color);
+  position: relative;
+  margin-top: 10px;
+  border-radius: 2px; 
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+  transition: transform ease 0.25s;
+  will-change: transform;
+  padding: 10px 0 10px 0;
+  width: 200px;
+  height: max-content;
+}
+
+.compare-product-item:hover {
+  transform: translateY(-1px);
+  /* box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.05); */
+  box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.2);
+}
+.line{
+  height: 1px;
+  width: 100%;
+  background-color: #0077ff;
+}
+
+.addsp-cp .plus {
+  width: 60px;
+  height: 60px;
+}
+
+.addsp-cp .plus i {
+  width: 11px
+}
+
+.plus {
+  border: 2px dashed #ccc; /* Đường viền nét đứt */
+  border-radius: 8px; /* Góc bo tròn */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 25px;
+  margin-bottom: 20px;
+}
+
+.plus i {
+  color: #0077ff; /* Màu của dấu cộng */
+}
+
+span {
+  font-size: 16px;
+}
+.addsp-cp{
+  margin-top: 80px;
+  margin-left: 50px;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Màu đen với độ mờ là 50% */
+  z-index: 999; /* Đảm bảo lớp overlay ở trên cùng */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 600px;
+  width: 100%;
+  height: 500px;
+  position: relative;
+}
+
+.search-popup{
+  font-size: 18px;
+  text-align: center;
+  margin-top: 10px;
+}
+.search-container {
+  position: relative;
+  margin-top: 50px;
+}
+
+.search {
+  width: 100%;
+  position: relative;
+  display: flex;
+}
+
+.searchTerm {
+  width: 100%;
+  border: 3px solid #00B4CC;
+  border-right: none;
+  padding: 5px;
+  height: 36px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #9DBFAF;
+}
+
+.searchTerm:focus{
+  color: #222;
+}
+
+.searchButton {
+  width: 40px;
+  height: 36px;
+  border: 1px solid #00B4CC;
+  background: #00B4CC;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.wrap{
+  width: 80%;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* .popup button {
+  border: 1px; 
+  font-size: 14px;
+  cursor: pointer;
+}  */
+.close{
+  margin-left: 520px;
+  border: 1px; 
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.popup-list-product{
+  margin-top: 10px;
+  display: flex;
+  border: 10px;
+}
+.popup-product-item__img{
+  height: 200px;
+}
+.popup-product-item{
+  background-color: var(--white-color);
+  position: relative;
+  margin-top: 10px;
+  border-radius: 2px; 
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+  transition: transform ease 0.25s;
+  will-change: transform;
+  padding: 10px 0 10px 0;
+  width: 200px;
+  height: max-content;
+}
+
+.popup-product-item:hover {
+  transform: translateY(-1px);
+  /* box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.05); */
+  box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.2);
+}
+.no-results{
+  font-size: 14px;
+  padding-left: 60px;
+}
+.line-popup{
+  height: 1px;
+  width: 100%;
+  padding-left: 60px;
+  background-color: #0077ff;
+  margin-top: 100px;
+}
+
+.group .content table tr td:first-child {
+  width: 220px;
+  vertical-align: top;
+  color: rgb(79, 79, 79);
+  font-size: 13px;
+  font-weight: 500;
+  background: rgb(239, 239, 239);
+}
+
+.value1{
+  flex: 1 1 0%;
+  border-right: 0px;
+  width: 380px;
+}
+.value2{
+  flex: 1 1 0%;
+  border-right: 0px;
+  width: 380px;
+ 
+}
+.remove-product{
+  font-size: 8x;
+  margin-left: 100px;
+}

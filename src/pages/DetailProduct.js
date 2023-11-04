@@ -47,6 +47,11 @@ function DetailProduct(props) {
         dispatch(getCurrentUser())
     }, [dispatch])
 
+
+    const compareProduct = (product) => {
+        history.push('/so-sanh-san-pham', { product });
+    };
+
     const myRef = React.createRef();
 
     const handleTab = index => {
@@ -299,9 +304,14 @@ function DetailProduct(props) {
                                 </div>
                                 <div className="col l-7 m-6 c-12">
                                     <div className="product-detail">
-                                        <div className = "compare">
+                                        <div className="compare">
                                             <h4 className="product-name">{product.name}</h4>
-                                            <div className="product-compare"><a href="compare"><p>+ So sánh</p></a> </div>
+                                            <Link className="product-compare" to="#" onClick={(e) => {
+                                                                                                    e.preventDefault();
+                                                                                                    compareProduct(product);
+                                                                                                }}>
+                                                + So sánh
+                                            </Link>
                                         </div>
                                         <div className="product-detail-info">
                                             <p className="product-review"><span>{product?.review_count}</span> Đánh Giá
