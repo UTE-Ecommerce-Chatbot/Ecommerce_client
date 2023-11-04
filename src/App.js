@@ -30,6 +30,7 @@ import ListProductBrand from 'pages/ListProductBrand';
 import CustomerProfile from 'pages/CustomerProfile';
 import CustomerPassword from 'pages/CustomerPassword';
 import CustomerReview from 'pages/CustomerReview';
+import SearchPage from'pages/SearchPopup';
 import OAuth2RedirectHandler from 'components/Oauth2Handler/OAuth2RedirectHandler';
 // import Header2 from 'components/Header/Header2';
 const ListProductPage = React.lazy(() => import('./pages/ListProductPage'));
@@ -71,6 +72,7 @@ function App() {
               <PublicRoute exact path="/login" component={LoginPage} />
               <PublicRoute exact path="/register" component={RegisterPage} />
               <PublicRoute exact path="/so-sanh-san-pham" component={CompareProduct} />
+              <PublicRoute exact path="/popup" component={SearchPage} />
               <Route exact path="/oauth2/redirect" component={OAuth2RedirectHandler}></Route>
               <Route exact path="/checkout/cart" component={CartPage}></Route>
               <Route exact path="/search" render={(props) => <ListProductPage {...props} key={props.location.key} />}></Route>

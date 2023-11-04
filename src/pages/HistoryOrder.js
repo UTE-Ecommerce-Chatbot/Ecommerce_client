@@ -5,6 +5,7 @@ import { currency } from 'utils/FormatCurrency'
 import useTimeout from 'hooks/useTimeout';
 import Loading from 'components/Loading/Loading';
 import { getUserLogin } from 'actions/services/UserActions';
+import Swal from "sweetalert2";
 import { 
     getAllOrderByUser,
     cancelOrder,
@@ -28,22 +29,35 @@ export default function HistoryOrder(props) {
         username: '',
     })
     const handleSubmitOrder = async () => {
-        cancelOrder(orderId)
-          .then((res) => {
-            setLoading(false);
-            if(res.message ==="Huỷ đơn hàng thành công!"){
+  const confirm = async (message) => {
+    const confirmResult = await Swal.fire({
+      title: "Xác nhận hủy đơn hàng",
+      text: message,
+      icon: "warning",
+      buttons: ["Hủy", "Xác nhận"],
+    });
+
+    return confirmResult.value;
+  };
+
+  const confirmResult = await confirm("Bạn có chắc chắn muốn hủy đơn hàng này không?");
+        if (confirmResult ) {
+          cancelOrder(orderId)
+            .then((res) => {
+              setLoading(false);
+              if (res.message === "Huỷ đơn hàng thành công!") {
                 toast.success(res.message);
-            }
-            else {
-                toast.warning(res.message)
-            }
-          })
-          .catch((err) => {
-            setLoading(false);
-            toast.warning(err.response.message);
-          });
-    }
-   
+                window.location.reload();
+              } else {
+                toast.warning(res.message);
+              }
+            })
+            .catch((err) => {
+              setLoading(false);
+              toast.warning(err.response.message);
+            });
+        }
+      };
     const getUser = () => {
         getUserLogin()
             .then(res => {
