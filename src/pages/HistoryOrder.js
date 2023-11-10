@@ -111,15 +111,13 @@ export default function HistoryOrder(props) {
                                                         orders.map(item => {
                                                             return (
                                                                 <tr key={item.id}>
-                                                                    <td>
-                                                                        <Link to={`/customer/order/history/detail/${item.id}`} className="info-cusomer-order-link">
-                                                                            {item.id}
-                                                                        </Link>
-                                                                    </td>
+                                                                    <Link to={`/customer/order/history/detail/${item.id}`} className="info-cusomer-order-link">
+                                                                    <td>{item.id}</td>
                                                                     <td>{item.createdDate}</td>
                                                                     <td>{item.description}</td>
                                                                     <td>{currency(item.total_price + item.ship_fee)}</td>
                                                                     <td>{item.status_order_name}</td>
+                                                                    </Link>
                                                                     <td>
                                                                     <p 
                                                                         className="cancelOrderE" 

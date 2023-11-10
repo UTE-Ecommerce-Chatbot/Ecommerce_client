@@ -508,7 +508,6 @@ function DetailProduct(props) {
                                                     <div className="review-comment__created-date">
                                                         <span>Nhận xét vào {item.date_comment}</span>
                                                     </div>
-                                                    <span className="review-comment__reply">Gửi trả lời</span>
                                                 </div>
                                             </div>)
                                     })}
