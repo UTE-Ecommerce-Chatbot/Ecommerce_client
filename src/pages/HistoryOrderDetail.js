@@ -241,7 +241,7 @@ function HistoryOrderDetail(props) {
                                                                                             <Link className="product-name" to={`/san-pham/${item?.product_id}/${item?.product_slug}`}>{item?.product_name}</Link>
                                                                                             <p className="product-sku">SKU: {item?.product_id}</p>
                                                                                             {
-                                                                                                orderInfo?.status_order === 2 ? (
+                                                                                                orderInfo?.status_order === 3 ? (
                                                                                                     <div className="product-review">
                                                                                                         <span onClick={() => handleClickOpenForm(item)}>Viết nhận xét</span>
                                                                                                         <Link to={`/san-pham/${item?.product_id}/${item?.product_slug}`} target="_blank">Mua lại</Link>

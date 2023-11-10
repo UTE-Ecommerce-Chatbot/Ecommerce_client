@@ -68,8 +68,9 @@ export default function CustomerReviewForm(props) {
             date_comment: create_time
         }
         addComment(data)
-            .then((res) => {
-                toast.info(res.data.message, {
+        .then((res) => {
+            console.log("toi 1")
+            toast.info(res.message, {
                     position: "bottom-center",
                     theme: 'dark',
                     autoClose: 2500,
@@ -80,9 +81,13 @@ export default function CustomerReviewForm(props) {
                     progress: undefined,
                 });
                 handleCloseForm();
-            })
-            .catch(() => {
-                toast.error('Bình luận sản phẩm không thành công!', {
+        })
+        .catch((error) => {
+            // Xử lý lỗi
+            if (error.response) {
+                // Lỗi từ phía server với mã HTTP
+                console.error('Server error:', error.response.status, error.response.data);
+                toast.error('Bình luận sản phẩm không thành công! Mã lỗi: ' + error.response.status, {
                     position: "bottom-center",
                     theme: 'dark',
                     autoClose: 2000,
@@ -92,7 +97,63 @@ export default function CustomerReviewForm(props) {
                     draggable: true,
                     progress: undefined,
                 });
-            })
+            } else if (error.request) {
+                // Lỗi không nhận được phản hồi từ server
+                console.error('No response from server:', error.request);
+                toast.error('Không nhận được phản hồi từ server. Vui lòng thử lại sau.', {
+                    position: "bottom-center",
+                    theme: 'dark',
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+            } else {
+                // Lỗi khác
+                console.error('Error during addComment:', error.message);
+                toast.error('Bình luận sản phẩm không thành công! ' + error.message, {
+                    position: "bottom-center",
+                    theme: 'dark',
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+            }
+    });
+        // .catch(() => {
+        //     console.log("tới đâyz`")
+        // })
+        // addComment(data)
+        //     .then((res) => {
+        //         toast.info(res.data.message, {
+        //             position: "bottom-center",
+        //             theme: 'dark',
+        //             autoClose: 2500,
+        //             hideProgressBar: false,
+        //             closeOnClick: true,
+        //             pauseOnHover: true,
+        //             draggable: true,
+        //             progress: undefined,
+        //         });
+        //         handleCloseForm();
+        //     })
+        //     .catch(() => {
+        //         toast.error('Bình luận sản phẩm không thành công!', {
+        //             position: "bottom-center",
+        //             theme: 'dark',
+        //             autoClose: 2000,
+        //             hideProgressBar: false,
+        //             closeOnClick: true,
+        //             pauseOnHover: true,
+        //             draggable: true,
+        //             progress: undefined,
+        //         });
+        //     })
     }
 
     const ratingChanged = (newRating) => {
