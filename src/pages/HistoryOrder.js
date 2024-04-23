@@ -98,11 +98,11 @@ export default function HistoryOrder(props) {
                                             <table className="list__order-info">
                                                 <thead>
                                                     <tr>
-                                                        <th>Mã đơn hàng</th>
                                                         <th>Ngày mua</th>
                                                         <th>Sản phẩm</th>
                                                         <th>Tổng tiền</th>
                                                         <th>Trạng thái đơn hàng</th>
+                                                        <th>Chi tiết đơn hàng</th>
                                                         <th>Hủy đơn hàng</th>
                                                     </tr>
                                                 </thead>
@@ -111,13 +111,16 @@ export default function HistoryOrder(props) {
                                                         orders.map(item => {
                                                             return (
                                                                 <tr key={item.id}>
-                                                                    <Link to={`/customer/order/history/detail/${item.id}`} className="info-cusomer-order-link">
-                                                                    <td>{item.id}</td>
+                                                                    
                                                                     <td>{item.createdDate}</td>
                                                                     <td>{item.description}</td>
                                                                     <td>{currency(item.total_price + item.ship_fee)}</td>
                                                                     <td>{item.status_order_name}</td>
-                                                                    </Link>
+                                                                    <td>
+                                                                        <Link to={`/customer/order/history/detail/${item.id}`} className="info-cusomer-order-link">
+                                                                            Chi tiết
+                                                                        </Link>
+                                                                    </td>
                                                                     <td>
                                                                     <p 
                                                                         className="cancelOrderE" 
@@ -136,7 +139,6 @@ export default function HistoryOrder(props) {
                                                             )
                                                         })
                                                     }
-                                           
                                                 </tbody>
                                             </table>
                                         )
