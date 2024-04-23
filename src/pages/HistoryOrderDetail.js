@@ -243,7 +243,7 @@ function HistoryOrderDetail(props) {
                                                                                             {
                                                                                                 orderInfo?.status_order === 3 ? (
                                                                                                     <div className="product-review">
-                                                                                                        <span onClick={() => handleClickOpenForm(item)}>Viết nhận xét</span>
+                                                                                                        <span onClick={() => handleClickOpenForm(item)}>Đánh giá</span>
                                                                                                         <Link to={`/san-pham/${item?.product_id}/${item?.product_slug}`} target="_blank">Mua lại</Link>
                                                                                                     </div>
                                                                                                 ) : ""
