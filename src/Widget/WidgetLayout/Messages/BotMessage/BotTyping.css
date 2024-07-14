@@ -1,0 +1,60 @@
+/* BotTyping.css */
+.bot-typing-container {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.avatar-container {
+  display: flex;
+  width: 1.25rem;
+  align-items: flex-end;
+}
+
+.avatar {
+  height: 1.25rem;
+  width: 1.25rem;
+  border-radius: 50%;
+}
+
+.message-container {
+  display: flex;
+  width: fit-content;
+  gap: 0.5rem;
+  align-self: flex-start;
+  white-space: pre-line;
+  word-break: break-word;
+  border-top-left-radius: 1.25rem;
+  border-bottom-right-radius: 1.5625rem;
+  border-top-right-radius: 1.25rem;
+  border-bottom-left-radius: 0.3125rem;
+  padding: 1.25rem 0.9375rem;
+  font-size: 0.875rem;
+  color: white;
+}
+
+.dot {
+  height: 0.5rem;
+  width: 0.5rem;
+  animation: bounce 1s infinite;
+  border-radius: 50%;
+  padding: 0.0625rem;
+}
+
+.dot.animation-delay-32 {
+  animation-delay: 0.32s;
+}
+
+.dot.animation-delay-16 {
+  animation-delay: 0.16s;
+}
+
+@keyframes bounce {
+  0%,
+  80%,
+  100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}

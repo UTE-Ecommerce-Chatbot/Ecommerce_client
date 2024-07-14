@@ -15,6 +15,8 @@ import { getListRecommendForUser } from "actions/services/RecommendServices";
 import chatIcon from "../image/chat.png";
 import avatar from "../image/avatar.jpg";
 
+import RasaWidget from "../RasaWidget/RasaWidget";
+
 function HomePage(props) {
   const [products, setProducts] = useState([]);
   const [topSale, setTopSale] = useState([]);
@@ -382,80 +384,7 @@ function HomePage(props) {
         )}
       </div>
       {/* ---------chat-------- */}
-
-      <div className="chat" onClick={toggleChat}>
-        <img src={chatIcon} alt="Message" />
-      </div>
-      {isChatBoxVisible && (
-        <div className="chat-box">
-          <div className="chat-header">
-            <span>Chat now</span>
-            <button onClick={toggleChat}>--</button>
-          </div>
-          <div
-            className="chat-body"
-            ref={messageAreaRef}
-            style={{ overflowY: "scroll", maxHeight: "300px" }}
-          >
-            <div class="connecting">
-              <img src={avatar} alt="Avatar" className="avatar" />
-              <div className="message-text">
-                Xin chào! Tôi rất vui khi được hỗ trợ bạn.
-              </div>
-            </div>
-            <ul id="messageArea">
-              {messages.map((message, index) => (
-                <li
-                  key={index}
-                  className={
-                    message.sender === currentUser
-                      ? "sent-message"
-                      : "received-message"
-                  }
-                >
-                  <div className="message-container">
-                    {message.sender === currentUser && (
-                      <div className="sender-message">
-                        <img
-                          src={avatar}
-                          alt="Avatar"
-                          className="avatar-sender"
-                        />
-                        <div className="message-text-sender">
-                          {"Xin chào! Tôi rất vui khi được hỗ trợ bạn."}
-                        </div>
-                      </div>
-                    )}
-                    {message.sender === currentUser && (
-                      <div className="receiver-message">
-                        <img
-                          src={avatar}
-                          alt="Receiver Avatar"
-                          className="avatar"
-                        />
-                        <div className="message-text">
-                          {"Xin chào! Tôi rất vui khi được hỗ trợ bạn."}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="chat-footer">
-            {/* Input field for typing messages */}
-            <input
-              type="text"
-              placeholder="Type your message..."
-              value={inputMessage}
-              onChange={(e) => setInputMessage(e.target.value)}
-            />
-            {/* Send button */}
-            <button onClick={sendMessage}>Send</button>
-          </div>
-        </div>
-      )}
+      <RasaWidget />
     </>
   );
 }

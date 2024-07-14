@@ -1,0 +1,48 @@
+/* Image.css */
+.image-container {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.avatar-container {
+  display: flex;
+  width: 1.25rem;
+  align-items: flex-end;
+}
+
+.avatar {
+  height: 1.25rem;
+  width: 1.25rem;
+  border-radius: 50%;
+}
+
+.image-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.image-row {
+  width: fit-content;
+  min-width: 10%;
+  max-width: 75%;
+  margin-left: 1rem;
+  align-self: flex-start;
+  white-space: pre-line;
+  word-break: break-word;
+  font-size: 0.875rem;
+  color: white;
+}
+
+.image {
+  border-radius: 1.125rem;
+  box-shadow:
+    0 1px 3px 0 rgba(0, 0, 0, 0.1),
+    0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.timestamp {
+  font-size: 0.625rem;
+  font-style: italic;
+  color: gray;
+}
