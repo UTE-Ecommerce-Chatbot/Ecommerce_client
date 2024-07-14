@@ -1,0 +1,30 @@
+/* Messages.css */
+.messages-container {
+  position: absolute;
+  top: 17%;
+  display: flex;
+  height: 72%;
+  width: 100%;
+  flex-direction: column;
+  gap: 0.25rem;
+  align-items: flex-start;
+  overflow-y: auto;
+  border-radius: 1.2rem;
+  background-color: white;
+  padding: 0.5rem;
+  padding-top: 0.5rem;
+}
+
+.messages-container::-webkit-scrollbar {
+  width: 5px;
+}
+
+.messages-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.messages-container::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background-clip: padding-box;
+  border: none;
+}
