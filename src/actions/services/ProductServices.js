@@ -25,7 +25,7 @@ export const getProductByCategory = (searchObject) => {
     return axios.get(`${API_URL}/api/product/danh-muc/${searchObject.category}?page=${searchObject.page}&keyword=${searchObject.keyword}`)
 }
 
-export const getOneItem = (id, color) => {
+export const getOneItem = (id, color) => {  
     return axios.get(`${API_URL}/api/product/san-pham/${id}?color=${color}`);
 }
 

@@ -4,7 +4,8 @@ import { API_URL } from '../constants/constants'
 // http://localhost:8085/api/vnpay/make?vnp_Amount=1000000&vnp_Locale=vn&vnp_OrderInfo=Thanh+toan+don+hang&vnp_OrderType=topup&vnp_ReturnUrl=https%3a%2f%2fsandbox.vnpayment.vn%2ftryitnow%2fHome%2fVnPayReturn
 export const makePaymentVnpay = (order) => {
     return axios.post(
-        `${API_URL}/api/vnpay/make?vnp_Amount=${order.vnp_Amount}&vnp_Locale=vn&vnp_OrderInfo=${order.vnp_OrderInfo}&vnp_OrderType=250000&vnp_ReturnUrl=https%3a%2f%2fsandbox.vnpayment.vn%2ftryitnow%2fHome%2fVnPayReturn`
+        `http://localhost:8080/api/vnpay/make?vnp_Amount=1000000&vnp_Locale=vn&vnp_OrderInfo=Thanh+toan+don+hang&vnp_OrderType=topup&vnp_ReturnUrl=https%3a%2f%2fsandbox.vnpayment.vn%2ftryitnow%2fHome%2fVnPayReturn`
+        // `${API_URL}/api/vnpay/make?vnp_Amount=${order.vnp_Amount}&vnp_Locale=vn&vnp_OrderInfo=${order.vnp_OrderInfo}&vnp_OrderType=250000&vnp_ReturnUrl=https%3a%2f%2fsandbox.vnpayment.vn%2ftryitnow%2fHome%2fVnPayReturn`
     )
 }
 
