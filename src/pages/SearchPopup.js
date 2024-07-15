@@ -29,7 +29,7 @@ const SearchPage = ({ onSelectProduct, onClosePopup}) => {
     console.log(keyword);
     getProductList(searchObject)
       .then((res) => {
-        setSearchResults(res.data.content);
+        setSearchResults(res.data.content.slice(0,2));
         setLoading(false); // Đánh dấu tìm kiếm đã hoàn thành
       })
       .catch((err) => console.log(err));
@@ -46,7 +46,7 @@ const SearchPage = ({ onSelectProduct, onClosePopup}) => {
     setKeyword(e.target.value);
   };
   const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
+    if (e.key === "enter") {
       handleSearch();
     }
   };
@@ -96,6 +96,7 @@ const SearchPage = ({ onSelectProduct, onClosePopup}) => {
                 </div>
               </Link>
             </div>
+            
           ))
         ) : (
           <div className="no-results">Không có kết quả</div>
