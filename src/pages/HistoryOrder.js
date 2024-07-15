@@ -103,7 +103,7 @@ export default function HistoryOrder(props) {
                                                         <th>Tổng tiền</th>
                                                         <th>Trạng thái đơn hàng</th>
                                                         <th>Chi tiết đơn hàng</th>
-                                                        <th>Hủy đơn hàng</th>
+                                                        {/* <th>Hủy đơn hàng</th> */}
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -121,7 +121,7 @@ export default function HistoryOrder(props) {
                                                                             Chi tiết
                                                                         </Link>
                                                                     </td>
-                                                                    <td>
+                                                                    {/* <td>
                                                                     <p 
                                                                         className="cancelOrderE" 
                                                                         onClick={(e) => {
@@ -134,7 +134,7 @@ export default function HistoryOrder(props) {
                                                                         value={"Huỷ đơn hàng"}>
                                                                         Hủy đơn hàng
                                                                     </p>
-                                                                    </td>
+                                                                    </td> */}
                                                                 </tr>
                                                             )
                                                         })

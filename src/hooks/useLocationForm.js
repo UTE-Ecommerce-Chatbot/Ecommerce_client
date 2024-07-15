@@ -42,18 +42,25 @@ async function fetchInitialData() {
     const { city_id, district_id, ward_id } = (await axios.get(`${API_URL}/api/auth/info`, {
         headers: { Authorization: `Bearer ${token}` },
     })).data;
+
+    let city_id1 = city_id ? city_id : 202;
+    let district_id1 = district_id ? district_id : 1442;
+    let ward_id1 = ward_id ? ward_id : 20110;
+
     const [cities, districts, wards] = await Promise.all([
         fetchCityOptions(),
-        fetchDistrictOptions(city_id),
-        fetchWardOptions(district_id),
+        fetchDistrictOptions(city_id1),
+        fetchWardOptions(district_id1),
     ]);
+
+
     return {
         cityOptions: cities,
         districtOptions: districts,
         wardOptions: wards,
-        selectedCity: cities.find((c) => c.value === city_id),
-        selectedDistrict: districts.find((d) => d.value === district_id),
-        selectedWard: wards.find((w) => w.value === ward_id),
+        selectedCity: cities.find((c) => c.value === city_id1),
+        selectedDistrict: districts.find((d) => d.value === district_id1),
+        selectedWard: wards.find((w) => w.value === ward_id1),
     };
 }
 
