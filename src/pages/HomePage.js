@@ -103,16 +103,16 @@ function HomePage(props) {
   }, []);
   //   --------chat------
   const [isChatBoxVisible, setChatBoxVisible] = useState(false);
-  const [chatContent, setChatContent] = useState('');
+  const [chatContent, setChatContent] = useState("");
 
   const toggleChat = async () => {
     try {
       setChatBoxVisible(!isChatBoxVisible);
-      const response = await fetch('http://localhost:3030');
+      const response = await fetch("http://localhost:3030");
       const data = await response.text();
       setChatContent(data);
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
     }
   };
 
@@ -198,7 +198,7 @@ function HomePage(props) {
       <Slide />
       <Promotion />
 
-      <div className="row sm-gutter section__content">
+      {/* <div className="row sm-gutter section__content">
         <div className="col l-12 m-12 c-12">
           <div className="home-product">
             <div className="row sm-gutter section__item">
@@ -302,7 +302,7 @@ function HomePage(props) {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <Category />
       <div className="row sm-gutter section__content">
         <div className="col l-12 m-12 c-12">
@@ -392,10 +392,10 @@ function HomePage(props) {
       </div>
       {/* ---------chat-------- */}
 
-      <div className="chat" onClick={toggleChat}>
+      {/* <div className="chat" onClick={toggleChat}>
         <img src={chatIcon} alt="Message" />
       </div>
-      <div id="chat-box">{chatContent}</div>
+      <div id="chat-box">{chatContent}</div>*/}
       {/* {isChatBoxVisible && (
         <div className="chat-box">
           <div className="chat-header">
