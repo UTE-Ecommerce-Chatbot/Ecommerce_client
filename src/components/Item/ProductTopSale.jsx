@@ -1,17 +1,56 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { currency } from "../../utils/FormatCurrency";
+
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 function ProductTopSale(props) {
     const { products } = props;
 
-    console.log('popular', products)
+    const settings = {
+        dots: true,
+        infinite: false,
+        speed: 500,
+        slidesToShow: 6, // Hiển thị tối đa 6 sản phẩm trên một slide
+        slidesToScroll: 6,
+        centerMode: false,
+        focusOnSelect: true,
+        responsive: [
+          {
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 6,
+              slidesToScroll: 1,
+              infinite: true,
+              dots: true,
+            },
+          },
+          {
+            breakpoint: 600,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              initialSlide: 1,
+            },
+          },
+        ],
+        appendDots: (dots) => (
+          <div className="slick-dots-container">
+            <ul style={{ margin: "50px" }}> {dots} </ul>
+          </div>
+        ),
+        customPaging: (i) => <div className="slick-dot">{i + 1}</div>,
+      };
 
     return (
         <>
+        <Slider {...settings}>
             {products?.map((item) => {
                 const price = currency(item.price);
                 return (
-                    <div className="col l-2 m-2 c-6" key={item.slug}>
+                    <div className="col" key={item.slug}>
                         <Link to={`/san-pham/${item?.id}/${item.slug}`} className="home-product-item-link">
                             <div className="home-product-item">
                                 <div
@@ -46,6 +85,7 @@ function ProductTopSale(props) {
                     </div>
                 );
             })}
+        </Slider>
         </>
     );
 }
