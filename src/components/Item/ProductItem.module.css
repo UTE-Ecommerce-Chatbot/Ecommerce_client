@@ -1,16 +1,8 @@
-/* ProductItem.module.css */
-
 .carouselSlide {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: auto; /* Adjust height as needed */
-}
-
-.carouselItem {
-  flex: 1 0 auto;
-  max-width: 33.33%;
-  padding: 10px; /* Khoảng cách giữa các slide */
+  height: flex;
 }
 
 .productItem {
@@ -23,7 +15,7 @@
 
 .productItemImage {
   width: 100%;
-  height: 150px; /* Adjust height as needed */
+  height: 150px;
   background-size: cover;
   background-position: center;
 }
