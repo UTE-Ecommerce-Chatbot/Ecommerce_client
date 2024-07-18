@@ -11,9 +11,8 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentUser } from "actions/services/UserActions";
 import { getListRecommendForUser } from "actions/services/RecommendServices";
+import { getOneCategoryByCode } from "actions/services/CategoryActions";
 
-import chatIcon from "../image/chat.png";
-import avatar from "../image/avatar.jpg";
 
 function HomePage(props) {
   const [products, setProducts] = useState([]);
@@ -101,46 +100,18 @@ function HomePage(props) {
   useEffect(() => {
     ringBell(); // Gọi hàm khi component được render lần đầu
   }, []);
-  //   --------chat------
-  const [isChatBoxVisible, setChatBoxVisible] = useState(false);
-  const [chatContent, setChatContent] = useState("");
-
-  const toggleChat = async () => {
-    try {
-      setChatBoxVisible(!isChatBoxVisible);
-      const response = await fetch("http://localhost:3030");
-      const data = await response.text();
-      setChatContent(data);
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
-
-  const [messages, setMessages] = useState([]);
-  const [inputMessage, setInputMessage] = useState("");
-  // Function to add a new message to the chat
-  const addMessage = (message) => {
-    setMessages([...messages, message]);
-  };
-
-  // Function to handle sending a message
-  const sendMessage = () => {
-    if (inputMessage.trim() !== "") {
-      // Send the message to the server or perform other actions here
-      addMessage(inputMessage);
-      setInputMessage(""); // Clear the input field after sending the message
-    }
-  };
-
-  const currentUser = useSelector((state) => state.auth.currentUser);
-  const messageAreaRef = useRef(null);
-
+  //   --------------
+  const [category, setCategory] = useState([]);
   useEffect(() => {
-    // Cuộn xuống dưới cùng của phần tử `<ul>` khi có tin nhắn mới
-    if (messageAreaRef.current) {
-      messageAreaRef.current.scrollTop = messageAreaRef.current.scrollHeight;
-    }
-  }, [messages]);
+    getOneCategoryByCode()
+      .then((res) => {
+        setCategory(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <>
       <div className="navigation">
@@ -151,16 +122,14 @@ function HomePage(props) {
                 <div className="nav">
                   <div className="slider-bar">
                     <span className="products">
-                      <Link to="/" className="list">
-                        <div className="product">Thiết bị số</div>
-                      </Link>
-                      <Link to="/" className="list">
+                      
+                      <Link to="/dien-thoai" className="list">
                         <div className="product">Điện thoại</div>
                       </Link>
-                      <Link to="/" className="list">
+                      <Link to="/may-tinh-bang" className="list">
                         <div className="product">Máy tính bảng</div>
                       </Link>
-                      <Link to="/" className="list">
+                      <Link to="/laptop" className="list">
                         <div className="product">Laptop</div>
                       </Link>
                       <Link to="/" className="list">
@@ -181,12 +150,15 @@ function HomePage(props) {
                       <Link to="/" className="list">
                         <div className="product">Máy giặt Inverter</div>
                       </Link>
-                      <Link to="/" className="list">
+                      <Link to="/tivi" className="list">
                         <div className="product">Smart TV</div>
                       </Link>
                       <Link to="/" className="list">
                         <div className="product">Inverter TV</div>
                       </Link>
+                      <Link to="/" className="list">
+                        <div className="product">Thiết bị số</div>
+                      </Link >
                     </span>
                   </div>
                 </div>
