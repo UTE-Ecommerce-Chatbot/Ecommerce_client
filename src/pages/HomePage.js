@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState, useRef } from "react";
 import Slide from "components/Slide/Slide";
-import Promotion from "components/Promotion/Promotion";
+// import Promotion from "components/Promotion/Promotion";
 import Category from "components/CategoryHighlights/Category";
 import * as services from "actions/services/ProductServices";
 import useTimeout from "hooks/useTimeout";
@@ -12,7 +12,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCurrentUser } from "actions/services/UserActions";
 import { getListRecommendForUser } from "actions/services/RecommendServices";
 import { getOneCategoryByCode } from "actions/services/CategoryActions";
-
 
 function HomePage(props) {
   const [products, setProducts] = useState([]);
@@ -112,6 +111,10 @@ function HomePage(props) {
       });
   }, []);
 
+  const hasRecommendList = recommendList?.length > 0;
+  const hasProducts = products?.length > 0;
+  const hasTopSale = topSale?.length > 0;
+  const hasMostPopularProduct = mostPopularProduct?.length > 0;
   return (
     <>
       <div className="navigation">
@@ -122,7 +125,6 @@ function HomePage(props) {
                 <div className="nav">
                   <div className="slider-bar">
                     <span className="products">
-                      
                       <Link to="/dien-thoai" className="list">
                         <div className="product">Điện thoại</div>
                       </Link>
@@ -158,7 +160,7 @@ function HomePage(props) {
                       </Link>
                       <Link to="/" className="list">
                         <div className="product">Thiết bị số</div>
-                      </Link >
+                      </Link>
                     </span>
                   </div>
                 </div>
@@ -168,7 +170,7 @@ function HomePage(props) {
         </div>
       </div>
       <Slide />
-      <Promotion />
+      {/* <Promotion /> */}
 
       {/* <div className="row sm-gutter section__content">
         <div className="col l-12 m-12 c-12">
@@ -288,7 +290,15 @@ function HomePage(props) {
               {loading ? (
                 <ProductItemSkeleton total={products.length} />
               ) : (
-                <ProductTopSale products={topSale} />
+<>
+                {hasTopSale? (
+                  <ProductTopSale products={topSale} />
+                ) : (
+                  <div className="no-products">
+                    {/* Không có sản phẩm tương tự */}
+                  </div>
+                )}
+              </>
               )}
             </div>
           </div>
@@ -304,7 +314,15 @@ function HomePage(props) {
               {loading ? (
                 <ProductItemSkeleton total={mostPopularProduct.length} />
               ) : (
-                <ProductTopSale products={mostPopularProduct} />
+<>
+                {hasMostPopularProduct ? (
+                  <ProductTopSale products={mostPopularProduct} />
+                ) : (
+                  <div className="no-products">
+                    {/* Không có sản phẩm tương tự */}
+                  </div>
+                )}
+              </>
               )}
             </div>
           </div>
@@ -320,7 +338,15 @@ function HomePage(props) {
               {loading ? (
                 <ProductItemSkeleton total={products.length} />
               ) : (
-                <ProductItem products={products} />
+                <>
+                {hasProducts ? (
+                  <ProductItem products={products} />
+                ) : (
+                  <div className="no-products">
+                    {/* Không có sản phẩm tương tự */}
+                  </div>
+                )}
+              </>
               )}
               <div className="col l-12 m-12 c-12">
                 <div className="section-center">
@@ -353,7 +379,15 @@ function HomePage(props) {
                 {loading ? (
                   <ProductItemSkeleton total={products.length} />
                 ) : (
-                  <ProductItem products={recommendList} />
+                  <>
+                    {hasRecommendList ? (
+                      <ProductItem products={recommendList} />
+                    ) : (
+                      <div className="no-products">
+                        {/* Không có sản phẩm tương tự */}
+                      </div>
+                    )}
+                  </>
                 )}
               </div>
             </div>
