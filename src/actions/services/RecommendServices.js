@@ -18,3 +18,10 @@ export const getListRecommendForUser = () => {
     url: `${API_URL}/api/recommend/list`,
   });
 };
+
+export const getListRecentViewed = (id) => {
+  return axios({
+      method: 'GET',
+      url: `${API_URL}/api/recommend/view/${id}`
+  });
+}

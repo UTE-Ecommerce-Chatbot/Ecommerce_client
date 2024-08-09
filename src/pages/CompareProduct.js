@@ -128,6 +128,7 @@ const CompareProduct = () => {
               <SearchPage
                 onSelectProduct={handleSelectProduct}
                 onClosePopup={handleClosePopup}
+                categoryCode={product1?.category.code}
               />
             </div>
           </div>

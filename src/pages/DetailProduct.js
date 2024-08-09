@@ -21,6 +21,7 @@ import {
 } from "actions/services/ProductServices";
 import { getAllCommentByProductId } from "actions/services/CommentServices";
 import {
+  getListRecentViewed,
   getListRecommendForUser,
   getSimilarProduct,
 } from "actions/services/RecommendServices";
@@ -134,6 +135,17 @@ function DetailProduct(props) {
           }
         })
         .catch(() => setProductLiked(false));
+    } else {
+      getListRecentViewed(id)
+        .then((res) => {
+          setProductViewedd(res);
+        })
+        .catch(() => setProductViewedd([]));
+      getListRecommendForUser()
+        .then((res) => {
+          setRecommendList(res);
+        })
+        .catch(() => setRecommendList([]));
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -689,7 +701,13 @@ function DetailProduct(props) {
             <div className="row sm-gutter section__item">
               <div className="col l-12 m-12 c-12">
                 <div className="home-product-category-item">
-                  <h3 className="home-product-title">Sản phẩm bạn đã xem</h3>
+                  {username ? (
+                    <h3 className="home-product-title">Sản phẩm bạn đã xem</h3>
+                  ) : (
+                    <h3 className="home-product-title">
+                      Sản phẩm mọi người đã xem
+                    </h3>
+                  )}
                 </div>
               </div>
               {loading ? (
@@ -700,7 +718,7 @@ function DetailProduct(props) {
                     <ProductItem products={productViewed} />
                   ) : (
                     <div className="no-products">
-                      {/* Không có sản phẩm tương tự */}
+                      <span>Yêu cầu đăng nhập</span>
                     </div>
                   )}
                 </>

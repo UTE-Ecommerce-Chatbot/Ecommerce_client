@@ -197,7 +197,7 @@ function ResultOrderPage(props) {
                 if (res.send_status === 0) {
                     const data = {
                         to: res.email,
-                        from: "lauivetvan1@gmail.com",
+                        from: "uteshop.vvn1@gmail.com",
                         subject: `Xác nhận đơn hàng #${res.id}`,
                         id: res.id,
                         order: res

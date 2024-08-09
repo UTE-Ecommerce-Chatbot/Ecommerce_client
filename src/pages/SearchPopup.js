@@ -1,11 +1,11 @@
 import "App.css";
-import axios from 'axios';
+import axios from "axios";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { getProductList } from "actions/services/ProductServices";
 import ProductSkeleton from "components/Item/ProductSkeleton";
 
-const SearchPage = ({ onSelectProduct, onClosePopup}) => {
+const SearchPage = ({ onSelectProduct, onClosePopup, categoryCode }) => {
   const params = new URLSearchParams(window.location.search);
   const [loading, setLoading] = useState(true);
   const page = params.get("page");
@@ -17,26 +17,27 @@ const SearchPage = ({ onSelectProduct, onClosePopup}) => {
       const response = await axios.get(`/api/product/san-pham/${id}`);
       return response.data;
     } catch (error) {
-      console.error('Error fetching product:', error);
+      console.error("Error fetching product:", error);
       throw error;
     }
   };
-  
+
   const handleSearch = () => {
     let searchObject = {};
     searchObject.keyword = keyword ? keyword : "";
     searchObject.page = page ? parseInt(page) : 1;
+    searchObject.category = categoryCode;
     console.log(keyword);
-    getProductList(searchObject)
+    getProductList(categoryCode, searchObject)
       .then((res) => {
-        setSearchResults(res.data.content.slice(0,2));
+        setSearchResults(res.data.content.slice(0, 2));
         setLoading(false); // Đánh dấu tìm kiếm đã hoàn thành
       })
       .catch((err) => console.log(err));
   };
 
   const handleSelectProduct = async (product) => {
-    var productdetail= await  getProduct(product.id);
+    var productdetail = await getProduct(product.id);
     console.log(productdetail);
     // var productfDetail = getProductById(product.id)
     onSelectProduct(productdetail); // Chuyển dữ liệu sản phẩm về trang CompareProduct
@@ -96,7 +97,6 @@ const SearchPage = ({ onSelectProduct, onClosePopup}) => {
                 </div>
               </Link>
             </div>
-            
           ))
         ) : (
           <div className="no-results">Không có kết quả</div>
